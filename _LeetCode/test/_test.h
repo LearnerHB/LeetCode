@@ -2,12 +2,8 @@
 #include <cstdio>
 #include <cstdlib>
 #include <string>
+#include <vector>
 
 using namespace std;
 
-int main(int argc, char const *argv[])
-{
-	
-	return 0;
-}
-
+void test();

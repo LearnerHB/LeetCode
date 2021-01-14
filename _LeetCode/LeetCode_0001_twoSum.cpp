@@ -6,6 +6,10 @@
 
 using namespace std;
 
+void test(){
+	cout << "test" << endl;
+	return;
+}
 //方法1：暴力搜索
 //执行用时424ms, 内存消耗7.2MB
 vector<int> twoSum_0(vector<int>& nums, int target)
