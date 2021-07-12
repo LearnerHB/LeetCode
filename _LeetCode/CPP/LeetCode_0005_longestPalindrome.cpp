@@ -30,6 +30,49 @@ s 仅由数字和英文字母（大写和/或小写）组成
 class Solution {
 public:
     string longestPalindrome(string s) {
+        int n = s.size();
+        if (n < 2){
+            return s;
+        }
 
+        int maxLen = 1;
+        int begin = 0;
+        // dp[i][j]表示s[i...j]是否回文串
+        vector<vector<int>> dp(n, vector<int>(n));
+        // 长度为1的都是回文串
+        for (int i = 0; i < n; i++){
+            dp[i][i] = true;
+        }
+        // 递推，枚举子串长度
+        for (int L = 2; L <= n; L++){
+            for (int i = 0; i < n; i++){
+                int j = i + L -1;
+                if (j >= n) break;
+                if (s[i] != s[j]){
+                    dp[i][j] = false;
+                }else{
+                    if (j - i < 3){
+                        dp[i][j] = true;
+                    }else{
+                        dp[i][j] = dp[i+1][j-1];
+                    }
+                }
+                // 如果上面dp[i][j]==true，即s[i][j]是回文，则记录回文长度和起始位置
+                if (dp[i][j] && j-i+1>maxLen){
+                    maxLen = j - i + 1;
+                    begin = i;
+                } 
+            }
+        }
+        return s.substr(begin, maxLen);
     }
 };
+
+
+
+
+
+
+
+
+
