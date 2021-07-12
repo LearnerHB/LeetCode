@@ -26,7 +26,10 @@ s 仅由数字和英文字母（大写和/或小写）组成
 链接：https://leetcode-cn.com/problems/longest-palindromic-substring
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 */
-
+// 解法1： DP  时间O(n^2) 空间O(n^2)
+// 状态转移方程    dp(i,j) = dp(i+1,j-1) && (s[i]==s[j])
+// 边界条件1      dp(i,i) = true
+// 边界条件2      dp(i,i+1) = (s[i]==s[i+1])   
 class Solution {
 public:
     string longestPalindrome(string s) {
@@ -67,6 +70,49 @@ public:
         return s.substr(begin, maxLen);
     }
 };
+
+
+// 解法2： 中心扩展算法  时间O(n^2) 空间O(n)
+// 思路：边界情况对应的子串是我们扩展出的回文串的回文中心————枚举所有回文中心并尝试扩展直到无法扩展为止
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int start = 0, end = 0;
+        for (int i = 0; i < s.size(); i++){
+            auto [left1, right1] = expandAroundCenter(s, i, i);
+            auto [left2, right2] = expandAroundCenter(s, i, i+1);
+            if (right1 - left1 > end - start){
+                start = left1;
+                end = right1;
+            }
+            if (right2 - left2 > end - start){
+                start = left2;
+                end = right2;
+            }
+        }
+        return s.substr(start, end - start + 1);
+    }
+
+    pair<int,int> expandAroundCenter(const string& s, int left, int right){
+        while (left >= 0 && right < s.size() && s[left] == s[right]) {
+            left--;
+            right++;
+        }
+        return {left+1, right-1};
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
