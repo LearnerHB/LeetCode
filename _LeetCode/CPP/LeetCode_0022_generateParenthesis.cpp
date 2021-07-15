@@ -23,10 +23,22 @@
 class Solution {
 public:
     vector<string> generateParenthesis(int n) {
-
+        vector<vector<string>> dp(n+1);
+        dp[0] = { "" };
+        dp[1] = { "()" };
+        for (int i = 2; i <= n; i++){
+            for (int j = 0; j < i; j++) {
+                for (string p : dp[j]) {
+                    for (string q : dp[i-1-j]) {
+                        string str = "(" + p + ")" + q;
+                        dp[i].push_back(str);
+                    }
+                }
+            }
+        }
+        return dp[n];
     }
 };
-
 // Sol 2 递归
 // 剩余左括号的总数要小于等于右括号
 class Solution {
