@@ -33,14 +33,12 @@ nums 中的每个值都 独一无二
 题目数据保证 nums 在预先未知的某个下标上进行了旋转
 -10^4 <= target <= 10^4
 
-
 进阶：你可以设计一个时间复杂度为 O(log n) 的解决方案吗？
 
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/search-in-rotated-sorted-array
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 */
-
 // Sol 1: 二分查找 O(logn)
 // 将数组一分为二，其中一定有一个是有序的，另一个可能是有序，也能是部分有序。
 // 有序部分用二分法查找。无序部分再一分为二，其中一个一定有序，另一个可能有序，可能无序。
@@ -53,7 +51,7 @@ public:
     	if (n == 1)
     		return nums[0] == target ? 0 : -1;
     	int left = 0, right = n - 1;
-    	while (left < right) {
+    	while (left <= right) {
     		int mid = (left + right) / 2;
     		if (nums[mid] == target)
     			return mid;
