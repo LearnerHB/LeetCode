@@ -8,6 +8,7 @@ if [[ $match != "" ]]
 # 如果找到 _LeetCode_$1_xxxx.cpp
 then 
     echo "-- Git Add and Commit ${match: 1} --"
+    mv ${match} ${match: 1}
     git add .
     git commit -m "Add ${match: 1}"
     echo "Done"
